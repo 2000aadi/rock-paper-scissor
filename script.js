@@ -1,11 +1,12 @@
 // variables that store player's and computer's choice
 let computerChoice, playerChoice;
 
+
 // const values used for showing results
 const winSentence = "You Win! ", loseSentence = "You Lose! ";
 
 // global score variable
-let score=0, round=0;
+let playerScore=0, computerScore=0, round=0;
 
 // global variable res used between multiple functions
 let res;
@@ -15,8 +16,11 @@ const values = ['Rock', 'Paper', 'Scissors'];
 
 // marks computerChoice randomly from above values array.
 function computerPlay (){
+  //  console.log('function called');
     computerChoice = values[Math.floor(Math.random() * values.length)]; 
 };
+
+
 
 const style = 'font-weight : bold';
 
@@ -56,7 +60,7 @@ function result (playerNum, compNum)  {
         if (playerNum==1 && compNum==3) return 1;
         else return -1;
     } else {
-        if (playerNum==3 && compNum==1) return 0;
+        if (playerNum==3 && compNum==1) return -1;
         else return 1;
     }
 }
@@ -68,24 +72,38 @@ function game(){
     //playerChoice = prompt("Enter your choice from Rock, Paper or Scissors: ");
     computerPlay();
     while (playerChoice == computerChoice) computerPlay();
+
+    //marks the computer choice to html 
+    document.getElementById("choice").innerHTML = computerChoice;
+
     console.log("Your input is " + playerChoice);
     console.log("Computer's choice is " + computerChoice);
 
-    console.log("%c" + playRound(playerChoice, computerChoice), style);
-    if (res==1) ++score;
-    //if (res==-1) --score;
-    console.log("%cYour score is " + score, "color:red;");
+    let verdict = playRound(playerChoice, computerChoice);
+    console.log("%c" + verdict, style);
+
+    //marks the verdict in html
+    document.getElementById('result').innerHTML = verdict;
+
+    if (res==1) ++playerScore;
+    else ++computerScore;
+
+    //marks playerScore & computerScores in html
+    document.getElementById('playerScore').innerHTML = playerScore;
+    document.getElementById('computerScore').innerHTML = computerScore;
+
+    console.log("%cYour score is " + playerScore, "color:red;");
 };
 
 
-const rockBtn = document.querySelector('#rock');
+const rockBtn = document.querySelector('#rockContainer');
 rockBtn.addEventListener('click', () => {
     //console.log('rock button working');
     playerChoice = 'Rock';
     game();
 });
 
-const paperBtn = document.querySelector('#paper');
+const paperBtn = document.querySelector('#paperContainer');
 paperBtn.addEventListener('click', () => {
     //console.log('paper button working');
     playerChoice = 'Paper';
@@ -93,10 +111,13 @@ paperBtn.addEventListener('click', () => {
 });
 
 
-const scissorsBtn = document.querySelector('#scissors');
+const scissorsBtn = document.querySelector('#scissorsContainer');
 scissorsBtn.addEventListener('click', () => {
     //console.log('rock button working');
     playerChoice = 'Scissors';
     game();
 });
 
+
+// calling functions
+//computerPlay();
