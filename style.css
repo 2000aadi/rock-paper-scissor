@@ -50,7 +50,7 @@ body .buttons {
 }
 
 /* match result */
-#result {
+#result, #winner {
     margin: 20px;
     font-size: 20px;
     text-align: left;

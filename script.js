@@ -3,7 +3,7 @@ let computerChoice, playerChoice;
 
 
 // const values used for showing results
-const winSentence = "You Win! ", loseSentence = "You Lose! ";
+const winSentence = "You Win this round! ", loseSentence = "You Lose this round! ";
 
 // global score variable
 let playerScore=0, computerScore=0, round=0;
@@ -87,6 +87,9 @@ function game(){
 
     if (res==1) ++playerScore;
     else ++computerScore;
+
+    if(playerScore == 5) {document.getElementById('winner').innerHTML = "You won the match!!";
+    } else if (computerScore == 5) {document.getElementById('winner').innerHTML = "You lost the match!!";}
 
     //marks playerScore & computerScores in html
     document.getElementById('playerScore').innerHTML = playerScore;
